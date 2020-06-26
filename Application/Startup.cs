@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using FluentValidation.AspNetCore;
 using Application.Data.Context;
+using Microsoft.AspNetCore.Http;
+using System.Text.Json.Serialization;
 
 namespace Application
 {
@@ -18,7 +20,7 @@ namespace Application
     public IConfiguration Configuration { get; }
 
     // This method gets called by the runtime. Use this method to add services to the container.
-    public void ConfigureServices(IServiceCollection services)
+    public static void ConfigureServices(IServiceCollection services)
     {
       services
         .AddControllers()
@@ -26,11 +28,10 @@ namespace Application
 
       services
         .AddDbContext<SqlLiteContext>();
-        // .AddDbContext<SqlLiteContext>(options => options.UseSqlite("Data Source=modeloApp.db"));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
       if (env.IsDevelopment())
       {
@@ -46,6 +47,11 @@ namespace Application
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllers();
+
+        endpoints.MapGet("/", async context =>
+        {
+          await context.Response.WriteAsync("{\"title\":\"Bem Vindo ao aplicativo \"ModeloApp\"}\"");
+        });
       });
     }
   }

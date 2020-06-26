@@ -1,5 +1,9 @@
 ﻿using Infra.Data.Context;
+
 using Microsoft.EntityFrameworkCore;
+
+using System;
+using System.IO;
 
 namespace Application.Data.Context
 {
@@ -9,8 +13,16 @@ namespace Application.Data.Context
     {
       if (!optionsBuilder.IsConfigured)
       {
-        // optionsBuilder.UseMySql("Server=[SERVIDOR];Port=[PORTA];Database=modelo;Uid=[USUARIO];Pwd=[SENHA]");
-        optionsBuilder.UseSqlite("Data Source=modeloApp.db");
+        var pathDB = Path.Combine("Data", "Database");
+
+        if (Directory.Exists(pathDB) == false)
+        {
+          Directory.CreateDirectory(pathDB);
+        }
+        
+        var fileDB = Path.Combine(pathDB, "modeloApp.db");
+
+        optionsBuilder.UseSqlite($"Data Source={fileDB}");
       }
     }
 

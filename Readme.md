@@ -1,6 +1,6 @@
 ﻿# Exemplo de Aplicação utilizando DDD
 
-  Este projeto foi criado baseado no artigo ["Uma arquitetura, em .Net Core, baseada nos princípios do DDD"](https://medium.com/@alexalvess/criando-uma-api-em-net-core-baseado-na-arquitetura-ddd-2c6a409c686) escrito pelo [*Alex Alves*](https://github.com/alex250195).
+  Este projeto foi criado baseado no artigo ["Uma arquitetura, em .Net Core, baseada nos princípios do DDD"](https://medium.com/@alexalvess/criando-uma-api-em-net-core-baseado-na-arquitetura-ddd-2c6a409c686) escrito pelo [*Alex Alves*](https://github.com/alexalvess).
 
   Implementei todo o projeto utilizando as seguintes ferramentas:
   - [dotnet CLI](https://dotnet.microsoft.com/download)
@@ -73,3 +73,7 @@
         - Services
         - Validators
   ```
+  
+  ## Migrations
+  - `dotnet ef migrations add CriacaoDaBase -o "./Data/Migrations"`
+  - `dotnet ef update`
